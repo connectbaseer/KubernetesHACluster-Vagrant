@@ -4,9 +4,9 @@
 
 Using Vagrant to Automate the VM installtion for HA Cluster
 
-* No of Master Nodes : 2 (2CPUs, 2GB RAM and running centos7)
+* No of Master Nodes : 3 (2CPUs, 2GB RAM and running centos7)
 * No of Worker Nodes : 2 (1CPUs, 2GB RAM and running centos7)
-* No of LoadBalancer Node : 1 (1CPUs, 2GB and RAM running centos7)
+* No of LoadBalancer Node : 1 (1CPUs, 1GB and RAM running centos7)
 
 
 **Vagrant Requirement :**
@@ -181,6 +181,7 @@ stream {
         upstream apiserver_read {
              server 192.168.30.5:6443;                     #--> control plane node 1 ip and kube-api port
              server 192.168.30.6:6443;                     #--> control plane node 2 ip and kube-api port
+             server 192.168.30.7:6443;                     #--> control plane node 3 ip and kube-api port
         }
         server {
                 listen 6443;                               # --> port on which load balancer will listen
@@ -264,9 +265,9 @@ Note: Run as root
 kubeadm join 192.168.0.200:6443 --token 9vr73a.a8uxyaju799qwdjv \
 --discovery-token-ca-cert-hash sha256:7c2e69131a36ae2a042a339b33381c6d0d43887e2de83720eff5359e26aec866 \
 --control-plane --certificate-key f8902e114ef118304e561c3ecd4d0b543adc226b7a07f675f56564185ffe0c07 \
---apiserver-advertise-address=192.168.56.3 
+--apiserver-advertise-address=192.168.30.6
 ```
-apiserver-advertise-address=192.168.56.3 --> address of the current master node
+apiserver-advertise-address=192.168.30.6 --> address of the current master node
 
 **Step 6 - Create a CNI for POD networking** 
 

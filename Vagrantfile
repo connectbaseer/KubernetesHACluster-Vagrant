@@ -37,7 +37,7 @@ Vagrant.configure("2") do |config|
     config.vm.define "k8s-worker-0#{i}" do |node|
       node.vm.provider "virtualbox" do |vb|
         vb.name = "k8s-worker-0#{i}"
-        vb.memory = 1024
+        vb.memory = 2048
         vb.cpus = 1
       end
       node.vm.hostname = "k8s-worker-0#{i}"
